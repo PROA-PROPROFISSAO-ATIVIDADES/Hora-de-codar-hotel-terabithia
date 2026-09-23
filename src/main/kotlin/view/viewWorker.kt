@@ -3,9 +3,9 @@ package Hotel.view
 import Hotel.controller.ControllerWorker
 import Hotel.model.modelWorker
 
-class viewWorker(
+class ViewWorker (
     private val controller : ControllerWorker
-) {
+)  {
     fun createWorker(): modelWorker? {
         println("-----------------------")
         println("Digite o nome do colaborador:")
@@ -23,15 +23,31 @@ class viewWorker(
     }
 
     fun login(): Boolean? {
-        println("-----------------------")
-        println("Digite o email: ")
-        val email = readln()
+        var attempts = 1;
+        repeat(3){
 
-        println("Digite a senha:")
-        val password = readln()
+            if(attempts > 1){
+                println("chance $attempts/3")
+            }
+            println("---------LOGIN--------------")
+            println("Digite o email: ")
+            val email = readln()
 
-        val data = controller.toLogin(email, password)
-        println(data.message)
-        return data.item
+            println("Digite a senha:")
+            val password = readln()
+
+            val data = controller.toLogin(email, password)
+
+            if(data.status == 200){
+                println("Login realizado com sucesso!")
+                return data.item
+            }
+
+            attempts++
+            println(data.message)
+        }
+        println("Conta bloqueada temporariamente")
+        System.exit(0)
+        return false
     }
 }

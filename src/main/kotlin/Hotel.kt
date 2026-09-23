@@ -1,32 +1,42 @@
 package Hotel
 
 import Hotel.controller.ControllerHotel
+import Hotel.controller.ControllerMenu
 import Hotel.controller.ControllerWorker
-import Hotel.model.modelHotel
 import Hotel.repository.RepositoryImpHotel
+import Hotel.repository.RepositoryImpMenu
 import Hotel.repository.RepositoryImpWorker
-import Hotel.view.viewHotel
-import Hotel.view.viewWorker
+import Hotel.view.ViewHotel
+import Hotel.view.ViewMenu
+import Hotel.view.ViewWorker
+import kotlin.system.exitProcess
+
+val repositoryHotel = RepositoryImpHotel()
+val controllerHotel = ControllerHotel(repositoryHotel)
+val viewHotel = ViewHotel(controllerHotel)
+
+val repositoryWorker = RepositoryImpWorker()
+val controllerWorker = ControllerWorker(repositoryWorker)
+val viewWorker = ViewWorker(controllerWorker)
 
 //Esse projeto está sendo desenvolvido de maneira incremental! Nem todos os padrões corretos
 // Serão implementadas de primeira, isso porque o exercicio me limita!
 // Para evitar fugir do pedido (INPUT - OUTPUT), vou elevando o nivel, conforme atendo os requisitos
 
 fun main() {
-    val repositoryHotel = RepositoryImpHotel()
-    val controllerHotel = ControllerHotel(repositoryHotel)
-    val viewHotel = viewHotel(controllerHotel)
-
     val hotel = controllerHotel.toCreate("Terabithia") //Aqui eu não utilizei a view! Para evitar erros na correção automatizada.
-
-    val repositoryWorker = RepositoryImpWorker()
-    val controllerWorker = ControllerWorker(repositoryWorker)
-    val viewWorker = viewWorker(controllerWorker)
-
     val worker1 = controllerWorker.toCreate("José", "jose@gmail.com", "2678")
-    viewWorker.login()
 
-    inicio()
+    val auth = viewWorker.login()
+    if(auth != true) return
+
+    val repositoryMenu = RepositoryImpMenu()
+    val controllerMenu = ControllerMenu(repositoryMenu)
+    val viewMenu = ViewMenu(controllerMenu)
+    controllerMenu.toCreateOption("Criar Funcionario", viewWorker::createWorker)
+    controllerMenu.toCreateOption("Sair", ::sairDoHotel)
+
+    viewMenu.start()
 }
 
 fun inicio() {
@@ -59,11 +69,17 @@ fun erro(){
 }
 
 fun sairDoHotel() {
-    println("Você deseja sair?")
-    val confirma = readln().toBoolean()
-    if (confirma) {
-        println("Até logo!")
-    } else {
-        inicio()
+    println("------------------------------------------")
+    println("Você deseja sair? (S para sim - N para não)")
+    val confirma = readln().uppercase()
+    when(confirma){
+        "S" -> {
+            println("Até logo!")
+            System.exit(0)
+        }
+        "N" -> {
+            return
+        }
+        else -> println("Opção Invalida")
     }
 }

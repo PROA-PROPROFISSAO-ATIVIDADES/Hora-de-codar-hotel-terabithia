@@ -4,7 +4,7 @@ import Hotel.Reply.replyFetch
 import Hotel.controller.ControllerHotel
 import Hotel.model.modelHotel
 
-class viewHotel(
+class ViewHotel(
     private val controller: ControllerHotel
 ) {
     fun createHotel(): modelHotel? {
