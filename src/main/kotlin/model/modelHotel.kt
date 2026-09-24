@@ -1,5 +1,6 @@
 package Hotel.model
 
-data class modelHotel(
-    val name: String
+data class ModelHotel(
+    val name: String,
+    val rooms: List<ModelRoom>
 );

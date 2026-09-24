@@ -1,7 +1,7 @@
 package Hotel.repository
 
-import Hotel.model.modelHotel
+import Hotel.model.ModelHotel
 
 interface RepositoryHotel {
-    fun save(hotel: modelHotel): modelHotel
+    fun save(hotel: ModelHotel): ModelHotel
 }

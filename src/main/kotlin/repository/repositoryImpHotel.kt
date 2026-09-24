@@ -1,11 +1,11 @@
 package Hotel.repository
 
-import Hotel.model.modelHotel
+import Hotel.model.ModelHotel
 
 class RepositoryImpHotel(): RepositoryHotel {
-    private val hotels = mutableListOf<modelHotel>()
+    private val hotels = mutableListOf<ModelHotel>()
 
-    override fun save(hotel: modelHotel): modelHotel {
+    override fun save(hotel: ModelHotel): ModelHotel {
         hotels.add(hotel)
         return hotel
     }

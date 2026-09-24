@@ -1,12 +1,12 @@
 package Hotel.view
 
 import Hotel.controller.ControllerWorker
-import Hotel.model.modelWorker
+import Hotel.model.ModelWorker
 
 class ViewWorker (
     private val controller : ControllerWorker
 )  {
-    fun createWorker(): modelWorker? {
+    fun createWorker(): ModelWorker? {
         println("-----------------------")
         println("Digite o nome do colaborador:")
         val name = readln()

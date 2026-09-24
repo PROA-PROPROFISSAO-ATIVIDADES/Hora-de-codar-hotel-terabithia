@@ -1,8 +1,8 @@
 package Hotel.repository
 
-import Hotel.model.modelWorker
+import Hotel.model.ModelWorker
 
 interface RepositoryWorker {
-    fun save(worker: modelWorker): modelWorker
-    fun find(email: String): modelWorker?
+    fun save(worker: ModelWorker): ModelWorker
+    fun find(email: String): ModelWorker?
 }
