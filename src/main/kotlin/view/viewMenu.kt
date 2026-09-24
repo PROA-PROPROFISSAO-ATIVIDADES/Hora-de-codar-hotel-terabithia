@@ -22,16 +22,19 @@ class ViewMenu(
     }
 
     fun run(title: String){
-        println("--------$title--------")
-        val options = controller.toList()
-        options.forEachIndexed { index, option -> println("${index+1} - ${option.title}") }
-        val input = readln().toIntOrNull()
-        val option = input?.let { options.getOrNull(it -1) }
-        if(option == null){
-            error("Opção Invalida")
+        while (true) {
+            println("--------$title--------")
+            val options = controller.toList()
+            options.forEachIndexed { index, option -> println("${index + 1} - ${option.title}") }
+            val input = readln().toIntOrNull()
+            val option = input?.let { options.getOrNull(it - 1) }
+            if (option == null) {
+                error("Opção Invalida")
+                continue
+            }
+            option.action()
+            if (option.title.startsWith("Voltar", ignoreCase = true)) return
         }
-
-        option!!.action()
     }
 
     fun error(message: String){

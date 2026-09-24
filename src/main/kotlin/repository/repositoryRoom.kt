@@ -1,6 +1,5 @@
 package Hotel.repository
 
-import Hotel.model.ModelGuest
 import Hotel.model.ModelRoom
 
 interface RepositoryRoom {

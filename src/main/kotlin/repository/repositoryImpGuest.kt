@@ -34,8 +34,9 @@ class RepositoryImpGuest : RepositoryGuest {
 
     override fun updateAt(index: Int, newName: String): ModelGuest? {
         if (index !in guests.indices) return null
-        guests[index].name = newName
+        val guest = guests[index]
+        guest.name = newName
         guests.sortBy { it.name }
-        return guests[index]
+        return guest
     }
 }

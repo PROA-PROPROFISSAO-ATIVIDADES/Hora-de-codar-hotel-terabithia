@@ -1,6 +1,5 @@
 package Hotel.repository
 
-import Hotel.model.ModelGuest
 import Hotel.model.ModelRoom
 
 class RepositoryImpRoom : RepositoryRoom{
@@ -17,7 +16,7 @@ class RepositoryImpRoom : RepositoryRoom{
     }
 
     override fun listEmptyRoom(): List<ModelRoom> {
-        return listRoom().filter { !it.ocupado }
+        return listRoom().filter { !it.occupied }
     }
 
     override fun save(room: ModelRoom): ModelRoom {
@@ -26,18 +25,18 @@ class RepositoryImpRoom : RepositoryRoom{
     }
 
     override fun find(roomNumber: Int): ModelRoom? {
-        return rooms.find { it.numero == roomNumber }
+        return rooms.find { it.number == roomNumber }
     }
 
     override fun setOccupied(roomNumber: Int): ModelRoom? {
         val room = find(roomNumber)
-        room?.ocupado = true
+        room?.occupied = true
         return room
     }
 
     override fun unsetOccupied(roomNumber: Int): ModelRoom? {
         val room = find(roomNumber)
-        room?.ocupado = false
+        room?.occupied = false
         return room
     }
 }

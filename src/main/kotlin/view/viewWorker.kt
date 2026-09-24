@@ -47,7 +47,6 @@ class ViewWorker (
             println(data.message)
         }
         println("Conta bloqueada temporariamente")
-        System.exit(0)
         return false
     }
 }

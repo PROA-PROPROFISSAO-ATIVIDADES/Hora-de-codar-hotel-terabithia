@@ -1,6 +1,6 @@
 package Hotel.model
 
 data class ModelRoom(
-    val numero: Int,
-    var ocupado: Boolean
+    val number: Int,
+    var occupied: Boolean
 )
