@@ -17,7 +17,7 @@ class ViewGuest(
     }
 
     fun searchByPrefix() {
-        println("Digite o prefixo de busca:")
+        println("Digite o início do nome para pesquisar (prefixo):")
         val prefix = readln()
 
         val data = controller.toFindByPrefix(prefix)
@@ -35,7 +35,7 @@ class ViewGuest(
     }
 
     fun searchByName() {
-        println("Digite o nome de busca:")
+        println("Digite o nome completo para pesquisar:")
         val name = readln()
 
         val data = controller.toFind(name)
@@ -59,17 +59,17 @@ class ViewGuest(
         }
 
         list.forEachIndexed { index, guest ->
-            println("[${index + 1}] ${guest.name} - ${guest.creat_at}")
+            println("[${index + 1}] ${guest.name} - ${guest.createdAt}")
         }
         println("--------------------------------------")
     }
 
     fun updateGuest() {
         listGuests()
-        println("Digite o número do hóspede que deseja atualizar:")
+        println("Digite o índice do hóspede que deseja atualizar:")
         val index = (readln().toIntOrNull() ?: 0) - 1
 
-        println("Digite o novo nome:")
+        println("Digite o novo nome completo do hóspede:")
         val newName = readln()
 
         val data = controller.toUpdate(index, newName)
@@ -78,7 +78,7 @@ class ViewGuest(
 
     fun removeGuest() {
         listGuests()
-        println("Digite o número do hóspede que deseja remover:")
+        println("Digite o índice do hóspede que deseja remover:")
         val index = (readln().toIntOrNull() ?: 0) - 1
 
         val data = controller.toRemove(index)

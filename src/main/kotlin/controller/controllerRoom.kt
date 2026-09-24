@@ -1,20 +1,27 @@
 package Hotel.controller
 
 import Hotel.Reply.ReplyFetch
-import Hotel.model.ModelGuest
 import Hotel.model.ModelRoom
 import Hotel.repository.RepositoryImpRoom
 
 class ControllerRoom(
     private val repository: RepositoryImpRoom
 ) {
+    fun findAvailable(roomNumber: Int): ModelRoom? {
+        val room = repository.find(roomNumber)
+        return room?.takeIf { !it.occupied }
+    }
+
     fun toCreate(): ReplyFetch<ModelRoom>{
+        if (repository.listRoom().size >= 20) {
+            return ReplyFetch(400, "O hotel já possui 20 quartos", null)
+        }
         val room = ModelRoom(repository.listRoom().size, false)
         val data = repository.save(room)
 
         return ReplyFetch(
             201,
-            "Quarto n${data.numero}° com sucesso",
+            "Quarto n${data.number}° com sucesso",
             data
         )
     }
@@ -37,18 +44,18 @@ class ControllerRoom(
         )
     }
 
-    fun toChekIn(roomNumber: Int): ReplyFetch<ModelRoom> {
+    fun toCheckIn(roomNumber: Int): ReplyFetch<ModelRoom> {
         val room = repository.find(roomNumber)
-        if (room?.ocupado == false) {
+        if (room?.occupied == false) {
             repository.setOccupied(roomNumber)
             return ReplyFetch(200, "Sucesso ao reservar quarto", room)
         }
         return ReplyFetch(400, "Quarto já está ocupado", room)
     }
 
-    fun toChekOut(roomNumber: Int): ReplyFetch<ModelRoom> {
+    fun toCheckOut(roomNumber: Int): ReplyFetch<ModelRoom> {
         val room = repository.find(roomNumber)
-        if (room?.ocupado == true) {
+        if (room?.occupied == true) {
             repository.unsetOccupied(roomNumber)
             return ReplyFetch(200, "Sucesso ao liberar quarto", room)
         }

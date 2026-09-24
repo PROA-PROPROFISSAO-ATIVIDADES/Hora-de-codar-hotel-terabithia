@@ -12,8 +12,8 @@ data class ModelBooking(
     val subtotal: Double,
     val tax: Double,
     val total: Double,
-    val start_date: LocalDate,
-    val end_date: LocalDate,
-    val creat_at: LocalDateTime = LocalDateTime.now(),
-    val id: String = "$guest-$room-$creat_at-"
+    val startDate: LocalDate,
+    val endDate: LocalDate,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val id: String = "$guest-$room-$createdAt-"
 )
